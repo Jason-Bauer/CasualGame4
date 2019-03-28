@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 5570914868738060079}
   - component: {fileID: 7441749212031088391}
   - component: {fileID: 2388901158790454230}
+  - component: {fileID: 4694541339355546435}
+  - component: {fileID: 6501053399194873003}
   m_Layer: 0
   m_Name: enemy
   m_TagString: Untagged
@@ -96,10 +98,37 @@ MonoBehaviour:
     type: 3}
   startDelay: 0.5
   shootIncrement: 0.3
-  ringPulseBulletAmount: 0
+  ringPulseBulletAmount: 6
   random: 0
   ringPulse: 0
   straight: 0
   curve: 0
   plus: 0
-  x: 1
+  x: 0
+  shotType: 0
+--- !u!65 &4694541339355546435
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7792712767868440813}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.96, y: 2.57, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6501053399194873003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7792712767868440813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f29889f1df0b814d97f46c4d3f35fe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 7792712767868440813}

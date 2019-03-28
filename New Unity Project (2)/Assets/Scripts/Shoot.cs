@@ -15,9 +15,24 @@ public class Shoot : MonoBehaviour
     public bool plus;
     public bool x;
 
+    public int shotType;
+
     // Start is called before the first frame update
     void Start()
     {
+        shotType = Random.Range(0, 5);
+        if (shotType == 0)
+            random = true;
+        if (shotType == 1)
+            straight = true;
+        if (shotType == 2)
+            plus = true;
+        if (shotType == 3)
+            x = true;
+        if (shotType == 4)
+            ringPulse = true;
+
+
         if (random == true)
         {
             InvokeRepeating("randomShoot", startDelay, shootIncrement);
