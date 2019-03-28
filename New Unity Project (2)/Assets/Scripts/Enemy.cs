@@ -50,4 +50,14 @@ public class Enemy : MonoBehaviour
 
 
     }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "PlayerBullet")
+        {
+            gameObject.transform.DetachChildren();
+            Destroy(gameObject);
+        }
+
+    }
 }

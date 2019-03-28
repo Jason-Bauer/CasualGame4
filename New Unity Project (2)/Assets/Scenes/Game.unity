@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -394,7 +394,7 @@ PrefabInstance:
         type: 3}
       propertyPath: bullet
       value: 
-      objectReference: {fileID: 4578663833655136763, guid: 61f9bb7eee81a504286780cf0d7ea6f6,
+      objectReference: {fileID: 8951939579484139710, guid: a49d4987aecc1934aae658870c4baeac,
         type: 3}
     - target: {fileID: 6687613811262956587, guid: ca943a3c2e5f16c49b25e933b9b81a54,
         type: 3}
@@ -405,6 +405,16 @@ PrefabInstance:
         type: 3}
       propertyPath: fireRate
       value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8315924491053418378, guid: ca943a3c2e5f16c49b25e933b9b81a54,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2190707968252032267, guid: ca943a3c2e5f16c49b25e933b9b81a54,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca943a3c2e5f16c49b25e933b9b81a54, type: 3}
