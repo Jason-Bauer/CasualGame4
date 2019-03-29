@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     private float lastShot = 0.0f;
     public GameObject bullet;
     public GameObject bulletSpawn;
+    public GameObject manager;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +28,10 @@ public class Player : MonoBehaviour
             Shoot();
         }
     }
-
+    public void updatehealth()
+    {
+        manager.GetComponent<manager>().health--;
+    }
     private void Move()
     {
         //Position checks

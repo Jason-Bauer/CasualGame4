@@ -19,6 +19,7 @@ public class Bullet : MonoBehaviour
         if (col.gameObject.tag == "Player")
         {
             Destroy(gameObject);
+            col.gameObject.GetComponent<Player>().updatehealth();
         }
 
     }

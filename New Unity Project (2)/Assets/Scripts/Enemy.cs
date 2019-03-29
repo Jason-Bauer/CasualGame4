@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -8,10 +9,12 @@ public class Enemy : MonoBehaviour
     bool goLeft;
     bool goRight;
     public GameObject enemy;
+    public GameObject score;
     float enemyx;
     // Start is called before the first frame update
     void Start()
     {
+        score = GameObject.Find("Manager");
         moveMe = gameObject.GetComponent<Transform>();
 
         if (enemy.transform.position.x >=0 )
@@ -56,7 +59,9 @@ public class Enemy : MonoBehaviour
         if (col.gameObject.tag == "PlayerBullet")
         {
             gameObject.transform.DetachChildren();
+            score.GetComponent<manager>().scorekeep += 10;
             Destroy(gameObject);
+         
         }
 
     }
