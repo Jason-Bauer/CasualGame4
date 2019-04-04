@@ -14,6 +14,12 @@ public class Player : MonoBehaviour
     private Vector3 mousePos;
     private Vector3 shootDir;
 
+    public int powerType;
+    public bool powered = false;
+    public float powerStart = 0.0f;
+    public float powerTime = 0.0f;
+    public float powerDuration = 10.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +40,33 @@ public class Player : MonoBehaviour
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         RotateToMousePos(mousePos);
+
+        //Powerup Timing
+        if (powered)
+        {
+            powerTime = Time.time;
+
+            if (powerTime - powerStart > powerDuration)
+            {
+                powered = false;
+                powerTime = 0.0f;
+                powerStart = 0.0f;
+
+                switch (powerType)
+                {
+                    case 1:
+                        fireRate *= 2;
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
     }
     public void updatehealth()
     {
