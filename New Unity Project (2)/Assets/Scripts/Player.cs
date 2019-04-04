@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     public GameObject bullet;
     public GameObject bulletSpawn;
     public GameObject manager;
+    private Vector3 mousePos;
+    private Vector3 shootDir;
 
     // Start is called before the first frame update
     void Start()
@@ -23,10 +25,15 @@ public class Player : MonoBehaviour
     {
         Move();
         
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Mouse0))
         {
             Shoot();
         }
+
+        //mousePos = Input.mousePosition;
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        RotateToMousePos(mousePos);
     }
     public void updatehealth()
     {
@@ -53,19 +60,19 @@ public class Player : MonoBehaviour
         }
 
         //Movement key checks
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.UpArrow))
         {
             rigBod.AddForce(Vector3.up * Time.deltaTime * speed);
         }
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
             rigBod.AddForce(Vector3.left * Time.deltaTime * speed);
         }
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.DownArrow))
         {
             rigBod.AddForce(Vector3.down * Time.deltaTime * speed);
         }
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.RightArrow))
         {
             rigBod.AddForce(Vector3.right * Time.deltaTime * speed);
         }
@@ -76,9 +83,20 @@ public class Player : MonoBehaviour
         //If it's time to shoot, then shoot!
         if (Time.time > fireRate + lastShot)
         {
-            GameObject instance = Instantiate(bullet, bulletSpawn.transform);
-            instance.GetComponent<Rigidbody>().velocity = new Vector3(0.0f,1.0f,0.0f) * Time.deltaTime * 2000.0f;
+            GameObject instance = Instantiate(bullet, bulletSpawn.transform.position, bulletSpawn.transform.rotation);
+            instance.GetComponent<Rigidbody>().velocity = shootDir * Time.deltaTime * 1000.0f;
             lastShot = Time.time;
         }
+    }
+
+    private void RotateToMousePos(Vector3 mousePos)
+    {
+        Vector3 direction = new Vector3(
+            mousePos.x - transform.position.x,
+            mousePos.y - transform.position.y,
+            0.0f);
+
+        transform.up = direction;
+        shootDir = direction;
     }
 }
