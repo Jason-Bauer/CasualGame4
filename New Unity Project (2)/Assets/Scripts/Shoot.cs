@@ -8,10 +8,17 @@ public class Shoot : MonoBehaviour
     public float startDelay;
     public float shootIncrement;
     public int ringPulseBulletAmount;
+    public int rotateBulletAmount;
+    public int rotationOffset = 0;
+    public int sineOffset = 0;
+    public bool sineDir = false;
+
+
     public bool random;
     public bool ringPulse;
+    public bool rotate;
     public bool straight;
-    public bool curve;
+    public bool sine;
     public bool plus;
     public bool x;
 
@@ -20,7 +27,8 @@ public class Shoot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        shotType = Random.Range(0, 5);
+        
+        shotType = Random.Range(0, 7);
         if (shotType == 0)
             random = true;
         if (shotType == 1)
@@ -31,6 +39,10 @@ public class Shoot : MonoBehaviour
             x = true;
         if (shotType == 4)
             ringPulse = true;
+        if (shotType == 5)
+            rotate = true;
+        if (shotType == 6)
+            sine = true;
 
 
         if (random == true)
@@ -52,6 +64,14 @@ public class Shoot : MonoBehaviour
         if (ringPulse == true)
         {
             InvokeRepeating("ringPulseShoot", startDelay, shootIncrement);
+        }
+        if (rotate == true)
+        {
+            InvokeRepeating("rotateBullets", startDelay, shootIncrement);
+        }
+        if (sine == true)
+        {
+            InvokeRepeating("sineWave", startDelay, shootIncrement);
         }
 
     }
@@ -112,6 +132,53 @@ public class Shoot : MonoBehaviour
         }
     }
 
+    void rotateBullets()
+    {
+        Vector3 center = transform.position;
+        for (int i = 0; i < rotateBulletAmount; i++)
+        {
+            float degree = (((360 / rotateBulletAmount) * i) + rotationOffset);
+            rotationOffset += 3;
+            rotationOffset = rotationOffset % 360;
+            Vector3 pos = placeOnCircle(center, 1.0f, (int)degree);
+            Quaternion rot = Quaternion.FromToRotation(Vector3.right, center - pos);
+            GameObject temp = Instantiate(projectile, pos, rot, gameObject.transform);
+            temp.GetComponent<Rigidbody>().velocity = temp.transform.right.normalized * -5;
+        }
+    }
+
+    void sineWave()
+    {
+        Vector3 center = transform.position;
+        for (int i = 0; i < rotateBulletAmount; i++)
+        {
+            float degree = (((360 / rotateBulletAmount) * i) + sineOffset);
+            if (sineOffset > 40)
+            {
+                sineDir = true;
+                sineOffset -= 3;
+            }
+            else if(sineOffset < -40)
+            {
+                sineDir = false;
+                sineOffset += 3;
+            }
+            else if (sineDir)
+            {
+                sineOffset -= 3;
+            }
+            else
+            {
+                sineOffset += 3;
+            }
+            rotationOffset = rotationOffset % 360;
+            Vector3 pos = placeOnCircle(center, 1.0f, (int)degree);
+            Quaternion rot = Quaternion.FromToRotation(Vector3.right, center - pos);
+            GameObject temp = Instantiate(projectile, pos, rot, gameObject.transform);
+            temp.GetComponent<Rigidbody>().velocity = temp.transform.right.normalized * -5;
+        }
+    }
+
     Vector3 placeOnCircle(Vector3 center, float radius, int angle)
     {
         float ang = angle;
@@ -121,5 +188,7 @@ public class Shoot : MonoBehaviour
         pos.z = center.z;
         return pos;
     }
+
+
 
 }

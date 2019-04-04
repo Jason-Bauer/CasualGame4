@@ -97,12 +97,14 @@ MonoBehaviour:
   projectile: {fileID: 4578663833655136763, guid: 61f9bb7eee81a504286780cf0d7ea6f6,
     type: 3}
   startDelay: 0.5
-  shootIncrement: 0.3
+  shootIncrement: 0.6
   ringPulseBulletAmount: 6
+  rotateBulletAmount: 4
+  rotationOffset: 0
   random: 0
   ringPulse: 0
+  rotate: 0
   straight: 0
-  curve: 0
   plus: 0
   x: 0
   shotType: 0
@@ -132,3 +134,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 7792712767868440813}
+  score: {fileID: 0}
