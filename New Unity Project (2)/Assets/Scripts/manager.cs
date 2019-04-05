@@ -7,7 +7,7 @@ public class manager : MonoBehaviour
     // Start is called before the first frame update
 
     public GameObject enemy;
-    public float spawnTime= 7f;
+    public float spawnTime= 0.5f;
     public int scorekeep = 0;
     public int health = 10;
     public Text score,Health;

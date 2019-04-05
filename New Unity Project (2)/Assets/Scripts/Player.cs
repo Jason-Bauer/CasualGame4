@@ -84,7 +84,7 @@ public class Player : MonoBehaviour
         if (Time.time > fireRate + lastShot)
         {
             GameObject instance = Instantiate(bullet, bulletSpawn.transform.position, bulletSpawn.transform.rotation);
-            instance.GetComponent<Rigidbody>().velocity = shootDir * Time.deltaTime * 1000.0f;
+            instance.GetComponent<Rigidbody>().velocity = shootDir * Time.deltaTime * 100.0f;
             lastShot = Time.time;
         }
     }

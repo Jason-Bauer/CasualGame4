@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
+//Help I'm trapped in the code.
 
+There is no GOD.
 public class HackerTyperCode : MonoBehaviour
 {
     public Text t;
