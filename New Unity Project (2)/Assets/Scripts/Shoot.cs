@@ -21,6 +21,7 @@ public class Shoot : MonoBehaviour
     public bool sine;
     public bool plus;
     public bool x;
+    public bool deathShower;
 
     public int shotType;
 
@@ -28,7 +29,7 @@ public class Shoot : MonoBehaviour
     void Start()
     {
         
-        shotType = Random.Range(0, 7);
+        shotType = Random.Range(0, 8);
         if (shotType == 0)
             random = true;
         if (shotType == 1)
@@ -43,6 +44,8 @@ public class Shoot : MonoBehaviour
             rotate = true;
         if (shotType == 6)
             sine = true;
+        if (shotType == 7)
+            deathShower = true;
 
 
         if (random == true)
@@ -72,6 +75,10 @@ public class Shoot : MonoBehaviour
         if (sine == true)
         {
             InvokeRepeating("sineWave", startDelay, shootIncrement);
+        }
+        if (deathShower == true)
+        {
+            InvokeRepeating("death", startDelay, shootIncrement);
         }
 
     }
@@ -145,6 +152,21 @@ public class Shoot : MonoBehaviour
             GameObject temp = Instantiate(projectile, pos, rot, gameObject.transform);
             temp.GetComponent<Rigidbody>().velocity = temp.transform.right.normalized * -5;
         }
+    }
+
+    void death()
+    {
+        Vector3 center = transform.position;
+        for (int i = 0; i < 4; i++)
+        {
+            float degree = ((360 / 4) * i);
+            Vector3 pos = placeOnCircle(center, 1.0f, (int)degree);
+            Quaternion rot = Quaternion.FromToRotation(Vector3.right, center - pos);
+            GameObject temp = Instantiate(projectile, pos, rot, gameObject.transform);
+            temp.GetComponent<Bullet>().deathExplode = true;
+            temp.GetComponent<Rigidbody>().velocity = temp.transform.right.normalized * -5;
+        }
+
     }
 
     void sineWave()
