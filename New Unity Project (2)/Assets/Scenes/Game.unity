@@ -343,7 +343,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 7792712767868440813, guid: 8e89bd43f2bd1a048b8ab59d84d51126, type: 3}
+  powerUp: {fileID: 2126486936082454322, guid: 00f06627d23244d46bec9d79e1488a3d, type: 3}
   spawnTime: 3
+  powerTime: 15
   scorekeep: 0
   health: 10
   score: {fileID: 1090271440}
