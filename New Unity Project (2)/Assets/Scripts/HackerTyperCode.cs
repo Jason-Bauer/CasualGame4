@@ -10,11 +10,30 @@ public class HackerTyperCode : MonoBehaviour
     string text;
     string[] strValues;
     public TextAsset textfile;
+    public GameObject cube;
+    public GameObject closebutton;
+    public GameObject texts;
+    public int lifegain = 0;
+ 
+    public GameObject player;
 
     // Start is called before the first frame update
     void Start()
     {
         ParseFile();
+    }
+
+    public void open()
+    {
+        cube.SetActive(true);
+        texts.SetActive(true);
+        closebutton.SetActive(true);
+    }
+    public void close()
+    {
+        cube.SetActive(false);
+        texts.SetActive(false);
+        closebutton.SetActive(false);
     }
     /*
     $(
@@ -225,13 +244,20 @@ public class HackerTyperCode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.anyKey)
+        if (Input.anyKey && texts.activeSelf)
         {
             Hackertype();
         }
         if (t.text.Length > 850)
         {
             t.text = "";
+            lifegain++;
+
+            if (lifegain > 4)
+            {
+                lifegain = 0;
+                player.GetComponent<manager>().health++;
+            }
         }
     }
 
