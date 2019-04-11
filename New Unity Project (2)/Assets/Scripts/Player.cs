@@ -12,13 +12,14 @@ public class Player : MonoBehaviour
     public GameObject bulletSpawn;
     public GameObject manager;
     private Vector3 mousePos;
-    private Vector3 shootDir;
+    public Vector3 shootDir;
 	
 	public int powerType;
     public bool powered = false;
     public float powerStart = 0.0f;
     public float powerTime = 0.0f;
     public float powerDuration = 10.0f;
+    public GameObject shieldRef;
 
     // Start is called before the first frame update
     void Start()
@@ -54,12 +55,14 @@ public class Player : MonoBehaviour
 
                 switch (powerType)
                 {
-                    case 1:
+                    case 0:
                         fireRate *= 2;
                         break;
-                    case 2:
+                    case 1:
+                        Debug.Log("Tripleshot ended");
                         break;
-                    case 3:
+                    case 2:
+                        shieldRef.SetActive(false);
                         break;
                     default:
                         break;
@@ -117,6 +120,21 @@ public class Player : MonoBehaviour
         {
             GameObject instance = Instantiate(bullet, bulletSpawn.transform.position, bulletSpawn.transform.rotation);
             instance.GetComponent<Rigidbody>().velocity = shootDir * Time.deltaTime * 100.0f;
+
+            if(powered && powerType == 1)
+            {
+                instance = Instantiate(bullet, bulletSpawn.transform.position, bulletSpawn.transform.rotation);
+                Vector3 adjustment = Vector3.Cross(Vector3.forward, shootDir);
+                Debug.Log(adjustment);
+
+                instance.transform.position += adjustment.normalized;
+                instance.GetComponent<Rigidbody>().velocity = shootDir * Time.deltaTime * 100.0f;
+
+                instance = Instantiate(bullet, bulletSpawn.transform.position, bulletSpawn.transform.rotation);
+                instance.transform.position -= adjustment.normalized;
+                instance.GetComponent<Rigidbody>().velocity = shootDir * Time.deltaTime * 100.0f;
+            }
+
             lastShot = Time.time;
         }
     }

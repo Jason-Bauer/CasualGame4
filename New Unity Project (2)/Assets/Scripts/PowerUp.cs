@@ -49,13 +49,18 @@ public class PowerUp : MonoBehaviour
                     col.gameObject.GetComponent<Player>().powerType = powerType;
                     break;
                 case 1:
-                    col.gameObject.GetComponent<Player>();
+                    col.gameObject.GetComponent<Player>().powered = true;
+                    col.gameObject.GetComponent<Player>().powerStart = Time.time;
+                    col.gameObject.GetComponent<Player>().powerType = powerType;
                     break;
                 case 2:
-                    col.gameObject.GetComponent<Player>();
+                    col.gameObject.GetComponent<Player>().powered = true;
+                    col.gameObject.GetComponent<Player>().powerStart = Time.time;
+                    col.gameObject.GetComponent<Player>().powerType = powerType;
+                    col.gameObject.GetComponent<Player>().shieldRef.SetActive(true);
                     break;
                 default:
-                    col.gameObject.GetComponent<Player>().fireRate /= 2;
+                    Debug.Log("somethin's real messed up");
                     break;
             }
 

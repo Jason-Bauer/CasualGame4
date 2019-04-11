@@ -31,6 +31,10 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
             col.gameObject.GetComponent<Player>().updatehealth();
         }
+        if(col.gameObject.tag == "Shield")
+        {
+            Destroy(gameObject);
+        }
 
     }
 

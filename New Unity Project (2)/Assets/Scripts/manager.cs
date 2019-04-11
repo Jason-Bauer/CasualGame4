@@ -9,7 +9,7 @@ public class manager : MonoBehaviour
     public GameObject enemy;
     public GameObject powerUp;
     public float spawnTime= 0.5f;
-    public float powerTime = 2.5f;
+    public float powerTime = 5f;
     public int scorekeep = 0;
     public int health = 10;
     public Text score,Health;
