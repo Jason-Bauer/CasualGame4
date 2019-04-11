@@ -93,6 +93,10 @@ public class Player : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, 5.5f, 0.0f);
         }
+        if (transform.position.z != 0.0f)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, 0.0f);
+        }
 
         //Movement key checks
         if (Input.GetKey(KeyCode.UpArrow))

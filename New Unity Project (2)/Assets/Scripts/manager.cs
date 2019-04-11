@@ -8,7 +8,8 @@ public class manager : MonoBehaviour
 
     public GameObject enemy;
     public GameObject powerUp;
-    public float spawnTime= 0.5f;
+    public float spawnTime= 0.4f;
+    private float lastSpawnTime = 0.0f;
     public float powerTime = 5f;
     public int scorekeep = 0;
     public int health = 10;
@@ -17,13 +18,14 @@ public class manager : MonoBehaviour
 
     void Start()
     {
-        InvokeRepeating("Spawn", spawnTime, spawnTime);
+        //InvokeRepeating("Spawn", spawnTime, spawnTime);
         InvokeRepeating("Powerup", powerTime, powerTime);
     }
 
     // Update is called once per frame
     void Update()
     {
+        Spawn();
         score.text = "Score: " + scorekeep;
         Health.text = "Health: " + health;
         if (health <= 0)
@@ -34,14 +36,15 @@ public class manager : MonoBehaviour
 
     void Spawn()
     {
-        spawnHere.x = Random.Range(-10, 10f);
-
-        spawnHere.y = Random.Range(0 , 5.5f);
-
-        spawnHere.z = 0;
-
-        Instantiate(enemy, transform.position=spawnHere,transform.rotation);
-
+        if (Time.time > spawnTime + lastSpawnTime)
+        {
+            spawnHere.x = Random.Range(-10, 10f);
+            spawnHere.y = Random.Range(0, 5.5f);
+            spawnHere.z = 0;
+            Instantiate(enemy, transform.position = spawnHere, transform.rotation);
+            lastSpawnTime = Time.time;
+            spawnTime = Random.Range(0.5f, 2.0f);
+        }
     }
 
     void Powerup()

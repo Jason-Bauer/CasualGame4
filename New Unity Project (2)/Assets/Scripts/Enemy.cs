@@ -6,10 +6,11 @@ using UnityEngine.UI;
 public class Enemy : MonoBehaviour
 {
     private Transform moveMe;
-    bool goLeft;
-    bool goRight;
+    //bool goLeft;
+    //bool goRight;
     public GameObject enemy;
     public GameObject score;
+    private Vector3 randDir;
     float enemyx;
 
     int clusterChance;
@@ -19,41 +20,66 @@ public class Enemy : MonoBehaviour
         score = GameObject.Find("Manager");
         moveMe = gameObject.GetComponent<Transform>();
 
-        if (enemy.transform.position.x >= 0)
-        {
-            goLeft = true;
+        //if (enemy.transform.position.x >= 0)
+        //{
+        //    goLeft = true;
+        //
+        //}
+        //else
+        //{
+        //    goRight = true;
+        //}
 
-        }
-        else
-        {
-            goRight = true;
-        }
+        randDir = new Vector3(Random.Range(-1.5f,1.5f), Random.Range(-1.5f,1.5f), 0.0f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (goLeft == true)
-            moveMe.position += new Vector3(-.01f, 0, 0);
+        //if (goLeft == true)
+        //    moveMe.position += new Vector3(-.01f, 0, 0);
+        //
+        //if (goRight == true)
+        //    moveMe.position += new Vector3(.01f, 0, 0);
+        //
+        //if (enemy.transform.position.x > 9.5)
+        //{
+        //    goLeft = true;
+        //
+        //    goRight = false;
+        //}
+        //
+        //if (enemy.transform.position.x < -9.5)
+        //{
+        //    goLeft = false;
+        //
+        //    goRight = true;
+        //}
 
-        if (goRight == true)
-            moveMe.position += new Vector3(.01f, 0, 0);
+        moveMe.position += randDir * Time.deltaTime;
 
-        if (enemy.transform.position.x > 9.5)
+        CheckBounds();
+
+    }
+
+    void CheckBounds()
+    {
+        if (enemy.transform.position.x <= -10f)
         {
-            goLeft = true;
-
-            goRight = false;
+            randDir.x *= -1.0f;
         }
-
-        if (enemy.transform.position.x < -9.5)
+        if (enemy.transform.position.x >= 10f)
         {
-            goLeft = false;
-
-            goRight = true;
+            randDir.x *= -1.0f;
         }
-
-
+        if (enemy.transform.position.y <= -5.5f)
+        {
+            randDir.y *= -1.0f;
+        }
+        if (enemy.transform.position.y >= 5.5f)
+        {
+            randDir.y *= -1.0f;
+        }
     }
 
     void OnTriggerEnter(Collider col)
